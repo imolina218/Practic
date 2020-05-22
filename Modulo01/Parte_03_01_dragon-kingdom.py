@@ -1,13 +1,17 @@
-# 01:
-# Design the score system of a game "Dragon Kingdom"
-# If the player enters a new cave and win the treasure wins 100 points.
-# If the player enters the second cave and win the treasure wins another 100 points.
-# The game have 5 caves and each have a puzzle with a mathematical problem or a riddle.
-# If the player lose 3 times loose the game and the total score accumulated is
-# printed in the console with the option to play again.
-
-
 def game_start():
+    def status():
+        print("{0} status is: \n>>{1} lives. \n>>{2} points. "
+              "\n>>{3} complete challenges.\n".format(user_name, lives,
+                                                      score, cave))
+
+    def run_out():
+        if lives <= 0:
+            confirmation = input("You run out lives, do you want to play again?...").lower()
+            if confirmation in "yes":
+                game_start()
+            else:
+                raise SystemExit
+
     print("Welcome to the Dragon Kingdom game.")
     print(">>You are going have to enter the different caves and solve puzzles.")
     print(">>You'll get 40 points for each correct puzzle.")
@@ -22,10 +26,7 @@ def game_start():
         total_score = 360
         cave = 1
         print()
-        status = "{0} status is: \n>>{1} lives \n>>{2} points and you complete " \
-                 "\n>>{3} cave/s".format(user_name, lives,
-                                             score, cave)
-        print(status)
+        status()
         print()
         raghnak = True
         lordk = True
@@ -62,13 +63,8 @@ def game_start():
                 print("Hmmm.. that doesn't seem right, you know the rules i will take 1 life.\n")
                 lives -= 1
             raghnak = False
-        print("{0} status is: \n>>{1} lives. \n>>{2} points. " \
-                 "\n>>{3} complete challenges.\n".format(user_name, lives,
-                                             score, cave))
+        status()
         while lordk:
-            if lives <= 0:
-                game = False
-                break
             print("Welcome {} to the cave of LordK".format(user_name))
             print("Let's heat the game little with a... riddle")
             lord_challenge01 = input("What five-letter word becomes shorter when you add two letters to it?...").lower()
@@ -79,13 +75,8 @@ def game_start():
             else:
                 print("WRONG!! you know the rules i will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
+
             print("Pay attention, most of the people fail.(all the maths problems responses are literal values)")
             lord_challenge02 = input("In a feast everyone shook hands with everybody else. There were 66 "
                                      "handshakes.\n How many people were at the feast ?...")
@@ -97,13 +88,8 @@ def game_start():
             else:
                 print("Hmmm.. that doesn't seem right, you know the rules i will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
+
             print("Last one and you go to the final boss.")
             lord_challenge03 = input("A little girl goes to the store and buys one dozen eggs. As she is going "
                                      "home, all but three break. How many eggs are left unbroken?...")
@@ -115,21 +101,12 @@ def game_start():
             else:
                 print("Hmmm.. that doesn't seem right, you know the rules i will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
             lordk = False
-        print("{0} status is: \n>>{1} lives. \n>>{2} points. " \
-              "\n>>{3} complete challenges.\n".format(user_name, lives,
-                                            score, cave))
+        status()
         while usarkna:
-            if lives <= 0:
-                game = False
-                break
+            run_out()
+
             print("Welcome {} to the last cave the cave of Usarkna".format(user_name))
             print("FOCUS, you'll need it but don't let that play against you, don't enter a brain maze.\n")
             lord_challenge01 = input("What is so fragile that saying its name breaks it?...").lower()
@@ -140,13 +117,8 @@ def game_start():
             else:
                 print("WRONG!! I will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
+
             print("Pay attention.")
             lord_challenge02 = input("I have lakes with no water, mountains with no stone and cities "
                                      "with no buildings. What am I?...")
@@ -158,13 +130,8 @@ def game_start():
             else:
                 print("Hmmm.. that doesn't seem right, I will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
+
             print("Last one and you win or loose. Don't rush THINK!!")
             lord_challenge03 = input("What does man love more than life, hate more than death or mortal strife;"
                                      " that which contented men desire; the poor have, the rich require; the miser"
@@ -179,15 +146,9 @@ def game_start():
             else:
                 print("Hmmm.. that doesn't seem right, I will take 1 life.\n")
                 lives -= 1
-                if lives <= 0:
-                    confirmation = input("You run out lives, do you want to play again?...").lower()
-                    if confirmation in "yes":
-                        game_start()
-                    else:
-                        game = False
-                        break
+                run_out()
             usarkna = False
-
+        status()
 
 
 game_start()
